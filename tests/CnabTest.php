@@ -31,7 +31,7 @@ class CnabTest extends TestCase
             type: CnabFile::TYPE_REMITTANCE,
             layout: CnabFile::LAYOUT_400,
             bank: 237,
-            file: substr_replace(Str::random(800), '1', 400, 1),
+            file: substr_replace('0' . Str::random(799), '1', 400, 1),
         );
 
         $this->assertIsArray($parsedFile);
