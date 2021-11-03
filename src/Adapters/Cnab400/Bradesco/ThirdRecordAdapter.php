@@ -8,9 +8,9 @@ class ThirdRecordAdapter extends Cnab400Adapter
 {
     public function __construct($data)
     {
-        $this->identificacao_do_registro = trim(substr($data, 0, 1));
-        $this->identificacao_da_empresa_no_banco = trim(substr($data, 1, 16));
-        $this->identificacao_titulo_no_banco = trim(substr($data, 17, 12));
+        $this->registro = trim(substr($data, 0, 1));
+        $this->id_empresa_no_banco = trim(substr($data, 1, 16));
+        $this->id_titulo_no_banco = trim(substr($data, 17, 12));
         $this->codigo_para_calculo_do_rateio = trim(substr($data, 29, 1));
         $this->tipo_de_valor_informado = trim(substr($data, 30, 1));
         $this->filler_1 = trim(substr($data, 31, 12));
@@ -44,6 +44,6 @@ class ThirdRecordAdapter extends Cnab400Adapter
         $this->filler_4 = trim(substr($data, 354, 31));
         $this->parcela_3 = trim(substr($data, 385, 6));
         $this->floating_para_3o_beneficiario = trim(substr($data, 391, 3));
-        $this->numero_sequencial_do_registro = trim(substr($data, 394, 6));
+        $this->sequencial = trim(substr($data, 394, 6));
     }
 }

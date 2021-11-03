@@ -8,7 +8,7 @@ class HeaderRecordAdapter extends Cnab400Adapter
 {
     public function __construct($data)
     {
-        $this->identificacao_do_registro = trim(substr($data, 0, 1));
+        $this->registro = trim(substr($data, 0, 1));
         $this->identificacao_do_arquivo_remessa = trim(substr($data, 1, 1));
         $this->literal_remessa = trim(substr($data, 2, 7));
         $this->codigo_de_servico = trim(substr($data, 9, 2));
@@ -22,6 +22,6 @@ class HeaderRecordAdapter extends Cnab400Adapter
         $this->identificacao_do_sistema = trim(substr($data, 108, 2));
         $this->numero_sequencial_de_remessa = trim(substr($data, 110, 7));
         $this->branco_02 = trim(substr($data, 117, 277));
-        $this->numero_sequencial_do_registro = trim(substr($data, 394, 6));
+        $this->sequencial = trim(substr($data, 394, 6));
     }
 }

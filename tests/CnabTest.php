@@ -2,6 +2,8 @@
 
 namespace Tests;
 
+use Idez\Cnab\Adapters\Cnab400\Bradesco\HeaderRecordAdapter;
+use Idez\Cnab\Adapters\Cnab400\Bradesco\TrailerRecordAdapter;
 use Idez\Cnab\Exceptions\InvalidFileException;
 use Idez\Cnab\Models\CnabFile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,20 +23,25 @@ class CnabTest extends TestCase
             type: CnabFile::TYPE_REMITTANCE,
             layout: CnabFile::LAYOUT_400,
             bank: 237,
-            file: '',
+            data: [],
         );
     }
 
     public function testCanParseBradescoCnabFile()
     {
+        $data = file(__DIR__ . '/../samples/CB060803a.REM', FILE_IGNORE_NEW_LINES);
+
         $parsedFile = cnab()->parse(
             type: CnabFile::TYPE_REMITTANCE,
             layout: CnabFile::LAYOUT_400,
             bank: 237,
-            file: substr_replace('0' . Str::random(799), '1', 400, 1),
+            data: $data,
         );
 
         $this->assertIsArray($parsedFile);
+        $this->assertCount(14, $parsedFile['records']);
+        $this->assertInstanceOf(HeaderRecordAdapter::class, $parsedFile['records'][0]);
+        $this->assertInstanceOf(TrailerRecordAdapter::class, end($parsedFile['records']));
     }
 
     public function testCanGenerateBradescoCnabFile()

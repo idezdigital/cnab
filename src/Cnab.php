@@ -26,7 +26,7 @@ class Cnab
         string $type,
         int $layout,
         int $bank,
-        string $file,
+        array $data,
     ): array {
         if (!in_array($layout, [CnabFile::LAYOUT_400])) {
             throw new UnsupportedLayoutException('Unsupported layout.');
@@ -36,13 +36,12 @@ class Cnab
             throw new UnsupportedBankException('Unsupported bank.');
         }
 
-        $raw = str_split($file, 400);
-        if (count($raw) <= 1) {
+        if (count($data) <= 1) {
             throw new InvalidFileException('Invalid file.');
         }
 
         $records = [];
-        foreach ($raw as $record) {
+        foreach ($data as $record) {
             if (strlen($record) < 400) {
                 throw new InvalidRecordException('Invalid record.');
             }

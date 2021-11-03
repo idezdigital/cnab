@@ -8,7 +8,7 @@ class SixthRecordAdapter extends Cnab400Adapter
 {
     public function __construct($data)
     {
-        $this->identificacao_do_registro = trim(substr($data, 0, 1));
+        $this->registro = trim(substr($data, 0, 1));
         $this->carteira = trim(substr($data, 1, 3));
         $this->agencia = trim(substr($data, 4, 5));
         $this->conta_corrente = trim(substr($data, 9, 7));
@@ -20,6 +20,6 @@ class SixthRecordAdapter extends Cnab400Adapter
         $this->numero_cod_identificacao_contrato = trim(substr($data, 31, 25));
         $this->prazo_de_validade_do_contrato_autorizacao = trim(substr($data, 57, 8));
         $this->brancos = trim(substr($data, 65, 330));
-        $this->numero_sequencial_do_registro = trim(substr($data, 395, 5));
+        $this->sequencial = trim(substr($data, 395, 5));
     }
 }

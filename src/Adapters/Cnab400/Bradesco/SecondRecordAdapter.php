@@ -8,7 +8,7 @@ class SecondRecordAdapter extends Cnab400Adapter
 {
     public function __construct($data)
     {
-        $this->identificacao_do_registro = trim(substr($data, 0, 1));
+        $this->registro = trim(substr($data, 0, 1));
         $this->mensagem_1 = trim(substr($data, 1, 80));
         $this->mensagem_2 = trim(substr($data, 81, 80));
         $this->mensagem_3 = trim(substr($data, 161, 80));
@@ -24,6 +24,6 @@ class SecondRecordAdapter extends Cnab400Adapter
         $this->digito_cc = trim(substr($data, 381, 1));
         $this->nosso_numero = trim(substr($data, 382, 11));
         $this->dac_nosso_numero = trim(substr($data, 393, 1));
-        $this->numero_sequencial_do_registro = trim(substr($data, 394, 6));
+        $this->sequencial = trim(substr($data, 394, 6));
     }
 }
