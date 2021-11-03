@@ -37,8 +37,8 @@ class FirstRecordAdapter extends Cnab400Adapter
         $this->especie_de_titulo = trim(substr($data, 147, 2));
         $this->identificacao = trim(substr($data, 149, 1));
         $this->data_da_emissao_do_titulo = trim(substr($data, 150, 6));
-        $this->{'1a_instrucao'} = trim(substr($data, 156, 2));
-        $this->{'2a_instrucao'} = trim(substr($data, 158, 2));
+        $this->primeira_instrucao = trim(substr($data, 156, 2));
+        $this->segunda_instrucao = trim(substr($data, 158, 2));
         $this->valor_a_ser_cobrado_por_dia_de_atraso = trim(substr($data, 160, 13));
         $this->data_limite_p_concessao_de_desconto = trim(substr($data, 173, 6));
         $this->valor_do_desconto = trim(substr($data, 189, 13));
@@ -48,7 +48,7 @@ class FirstRecordAdapter extends Cnab400Adapter
         $this->numero_inscricao_do_pagador = trim(substr($data, 220, 14));
         $this->nome_do_pagador = trim(substr($data, 234, 40));
         $this->endereco_completo = trim(substr($data, 274, 40));
-        $this->{'1a_mensagem'} = trim(substr($data, 314, 12));
+        $this->primeira_mensagem = trim(substr($data, 314, 12));
         $this->cep = trim(substr($data, 326, 5));
         $this->sufixo_do_cep = trim(substr($data, 331, 3));
         $this->beneficiario_final_ou_2a_mensagem = trim(substr($data, 334, 60));
