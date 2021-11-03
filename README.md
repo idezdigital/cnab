@@ -1,18 +1,17 @@
 # Laravel Cnab
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/idezdigital/cnab.svg?style=flat-square)](https://packagist.org/packages/idezdigital/cnab)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/idezdigital/cnab/Tests?label=tests)](https://github.com/idezdigital/cnab/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/idezdigital/cnab/Check%20&%20fix%20styling?label=code%20style)](https://github.com/idezdigital/cnab/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/idezdigital/laravel-cnab.svg?style=flat-square)](https://packagist.org/packages/idezdigital/laravel-cnab)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/idez/laravel-cnab.svg?style=flat-square)](https://packagist.org/packages/idez/laravel-cnab)
+[![Total Downloads](https://img.shields.io/packagist/dt/idez/laravel-cnab.svg?style=flat-square)](https://packagist.org/packages/idez/laravel-cnab)
 
-A Laravel package to handle Cnab files.
+A Laravel package to handle cnab files.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require idezdigital/laravel-cnab
+composer require idez/laravel-cnab
 ```
 
 You can publish and run the migrations with:
