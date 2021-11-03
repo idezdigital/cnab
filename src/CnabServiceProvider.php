@@ -1,6 +1,6 @@
 <?php
 
-namespace Idez\Cnab\Providers;
+namespace Idez\Cnab;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

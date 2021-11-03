@@ -8,7 +8,6 @@ use Idez\Cnab\Exceptions\InvalidFileException;
 use Idez\Cnab\Models\CnabFile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Str;
 
 class CnabTest extends TestCase
 {

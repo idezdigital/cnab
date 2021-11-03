@@ -61,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Idez\\Cnab\\Providers\\CnabServiceProvider"
+                "Idez\\Cnab\\CnabServiceProvider"
             ],
             "aliases": {
-                "Cnab": "Idez\\Cnab\\Facades\\CnabFacade"
+                "Cnab": "Idez\\Cnab\\CnabFacade"
             }
         }
     },

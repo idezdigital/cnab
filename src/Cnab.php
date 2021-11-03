@@ -28,11 +28,11 @@ class Cnab
         int $bank,
         array $data,
     ): array {
-        if (!in_array($layout, [CnabFile::LAYOUT_400])) {
+        if (! in_array($layout, [CnabFile::LAYOUT_400])) {
             throw new UnsupportedLayoutException('Unsupported layout.');
         }
 
-        if (!in_array($bank, [237])) {
+        if (! in_array($bank, [237])) {
             throw new UnsupportedBankException('Unsupported bank.');
         }
 

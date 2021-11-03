@@ -1,6 +1,6 @@
 <?php
 
-namespace Idez\Cnab\Facades;
+namespace Idez\Cnab;
 
 use Illuminate\Support\Facades\Facade;
 
