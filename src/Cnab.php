@@ -2,13 +2,6 @@
 
 namespace Idez\Cnab;
 
-use Idez\Cnab\Adapters\Cnab400\Bradesco\FirstRecordAdapter;
-use Idez\Cnab\Adapters\Cnab400\Bradesco\HeaderRecordAdapter;
-use Idez\Cnab\Adapters\Cnab400\Bradesco\SecondRecordAdapter;
-use Idez\Cnab\Adapters\Cnab400\Bradesco\SeventhRecordAdapter;
-use Idez\Cnab\Adapters\Cnab400\Bradesco\SixthRecordAdapter;
-use Idez\Cnab\Adapters\Cnab400\Bradesco\ThirdRecordAdapter;
-use Idez\Cnab\Adapters\Cnab400\Bradesco\TrailerRecordAdapter;
 use Idez\Cnab\Exceptions\InvalidFileException;
 use Idez\Cnab\Exceptions\InvalidRecordException;
 use Idez\Cnab\Exceptions\UnsupportedBankException;
@@ -20,7 +13,15 @@ class Cnab
     /**
      * Parse cnab file.
      *
+     * @param string $type
+     * @param int $layout
+     * @param int $bank
+     * @param array $data
      * @return array
+     * @throws InvalidFileException
+     * @throws InvalidRecordException
+     * @throws UnsupportedBankException
+     * @throws UnsupportedLayoutException
      */
     public function parse(
         string $type,
@@ -28,11 +29,11 @@ class Cnab
         int $bank,
         array $data,
     ): array {
-        if (! in_array($layout, [CnabFile::LAYOUT_400])) {
+        if ($layout != CnabFile::LAYOUT_400) {
             throw new UnsupportedLayoutException('Unsupported layout.');
         }
 
-        if (! in_array($bank, [237])) {
+        if ($bank != 237) {
             throw new UnsupportedBankException('Unsupported bank.');
         }
 
@@ -46,36 +47,24 @@ class Cnab
                 throw new InvalidRecordException('Invalid record.');
             }
 
-            switch (substr($record, 0, 1)) {
-                case '0':
-                    array_push($records, new HeaderRecordAdapter($record));
+            $adapter = match ($type) {
+                CnabFile::TYPE_REMITTANCE => match (substr($record, 0, 1)) {
+                    '0' => new Adapters\Cnab400\Remittance\HeaderRecordAdapter(),
+                    '1' => new Adapters\Cnab400\Remittance\FirstRecordAdapter(),
+                    '2' => new Adapters\Cnab400\Remittance\SecondRecordAdapter(),
+                    '3' => new Adapters\Cnab400\Remittance\ThirdRecordAdapter(),
+                    '6' => new Adapters\Cnab400\Remittance\SixthRecordAdapter(),
+                    '7' => new Adapters\Cnab400\Remittance\SeventhRecordAdapter(),
+                    '9' => new Adapters\Cnab400\Remittance\TrailerRecordAdapter(),
+                },
+                CnabFile::TYPE_RETURN => match (substr($record, 0, 1)) {
+                    '1' => new Adapters\Cnab400\Return\FirstRecordAdapter(),
+                    '3' => new Adapters\Cnab400\Return\ThirdRecordAdapter(),
+                    '9' => new Adapters\Cnab400\Return\TrailerRecordAdapter(),
+                }
+            };
 
-                    break;
-                case '1':
-                    array_push($records, new FirstRecordAdapter($record));
-
-                    break;
-                case '2':
-                    array_push($records, new SecondRecordAdapter($record));
-
-                    break;
-                case '3':
-                    array_push($records, new ThirdRecordAdapter($record));
-
-                    break;
-                case '6':
-                    array_push($records, new SixthRecordAdapter($record));
-
-                    break;
-                case '7':
-                    array_push($records, new SeventhRecordAdapter($record));
-
-                    break;
-                case '9':
-                    array_push($records, new TrailerRecordAdapter($record));
-
-                    break;
-            }
+            array_push($records, $adapter->fromString($record));
         }
 
         return [
@@ -89,14 +78,38 @@ class Cnab
     /**
      * Generate cnab file.
      *
-     * @return mixed
+     * @param string $type
+     * @param int $layout
+     * @param int $bank
+     * @param array $data
+     * @return array
+     * @throws InvalidFileException
+     * @throws UnsupportedBankException
+     * @throws UnsupportedLayoutException
      */
     public function generate(
         string $type,
         int $layout,
         int $bank,
         array $data
-    ): mixed {
-        return [];
+    ): array {
+        if ($layout != CnabFile::LAYOUT_400) {
+            throw new UnsupportedLayoutException('Unsupported layout.');
+        }
+
+        if ($bank != 237) {
+            throw new UnsupportedBankException('Unsupported bank.');
+        }
+
+        if (count($data) <= 1) {
+            throw new InvalidFileException('Invalid file.');
+        }
+
+        return [
+            'type' => $type,
+            'layout' => $layout,
+            'bank' => $bank,
+            'file' => '',
+        ];
     }
 }

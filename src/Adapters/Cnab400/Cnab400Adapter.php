@@ -7,6 +7,22 @@ use Carbon\Carbon;
 abstract class Cnab400Adapter
 {
     /**
+     * Get object from array.
+     *
+     * @param $array
+     * @return self
+     */
+    public static function fromArray(array $arr)
+    {
+        $object = new self([]);
+        foreach ($arr as $key => $value) {
+            $object->$key = $value;
+        }
+
+        return $object;
+    }
+
+    /**
      * Convert object to array.
      *
      * @return array
