@@ -117,7 +117,7 @@ class Cnab
             'type' => $type,
             'layout' => $layout,
             'bank' => $bank,
-            'content' => implode(PHP_EOL, $records) . PHP_EOL,
+            'content' => preg_replace('/\r\n|\r|\n/', "\r\n", implode(PHP_EOL, $records) . PHP_EOL),
         ];
     }
 }

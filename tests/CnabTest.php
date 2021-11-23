@@ -76,7 +76,7 @@ class CnabTest extends TestCase
             records: $parsedFile['records']
         );
 
-        $content = file_get_contents(__DIR__ . '/../samples/RT20210803.RET');
+        $content = preg_replace('/\r\n|\r|\n/', "\r\n", file_get_contents(__DIR__ . '/../samples/RT20210803.RET'));
 
         $this->assertIsArray($generatedFile);
         $this->assertIsString($generatedFile['content']);
