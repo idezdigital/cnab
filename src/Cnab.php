@@ -4,9 +4,11 @@ namespace Idez\Cnab;
 
 use Idez\Cnab\Exceptions\InvalidFileException;
 use Idez\Cnab\Exceptions\InvalidRecordException;
+use Idez\Cnab\Exceptions\ParseRecordFailedException;
 use Idez\Cnab\Exceptions\UnsupportedBankException;
 use Idez\Cnab\Exceptions\UnsupportedLayoutException;
 use Idez\Cnab\Models\CnabFile;
+use Throwable;
 
 class Cnab
 {
@@ -20,6 +22,7 @@ class Cnab
      * @return array
      * @throws InvalidFileException
      * @throws InvalidRecordException
+     * @throws ParseRecordFailedException
      * @throws UnsupportedBankException
      * @throws UnsupportedLayoutException
      */
@@ -65,7 +68,11 @@ class Cnab
                 }
             };
 
-            array_push($records, $adapter->fromString($record));
+            try {
+                array_push($records, $adapter->fromString($record));
+            } catch (Throwable $e) {
+                throw new ParseRecordFailedException('Failed to parse record.');
+            }
         }
 
         return [
@@ -82,7 +89,7 @@ class Cnab
      * @param string $type
      * @param int $layout
      * @param int $bank
-     * @param array $data
+     * @param array $records
      * @return array
      * @throws InvalidFileException
      * @throws UnsupportedBankException
@@ -92,7 +99,7 @@ class Cnab
         string $type,
         int $layout,
         int $bank,
-        array $data
+        array $records
     ): array {
         if ($layout != CnabFile::LAYOUT_400) {
             throw new UnsupportedLayoutException('Unsupported layout.');
@@ -102,7 +109,7 @@ class Cnab
             throw new UnsupportedBankException('Unsupported bank.');
         }
 
-        if (count($data) <= 1) {
+        if (count($records) <= 1) {
             throw new InvalidFileException('Invalid file.');
         }
 
@@ -110,7 +117,7 @@ class Cnab
             'type' => $type,
             'layout' => $layout,
             'bank' => $bank,
-            'file' => '',
+            'content' => implode("\r\n", $records) . "\r\n",
         ];
     }
 }

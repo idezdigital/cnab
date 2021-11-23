@@ -61,5 +61,7 @@ class HeaderRecordAdapter extends Cnab400Adapter
         $this->data_do_credito = trim(substr($str, 379, 6));
         $this->branco_02 = trim(substr($str, 385, 9));
         $this->sequencial = trim(substr($str, 394, 6));
+
+        return $this;
     }
 }
