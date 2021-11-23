@@ -34,7 +34,40 @@ class TrailerRecordAdapter extends Cnab400Adapter
     public $valor_total_dos_rateios_015_efetuados;
     public $quantidade_total_dos_rateios_08_efetuados;
     public $brancos_4;
-    public $numero_sequencial_do_registro;
+    public $sequencial;
+
+    public function __toString()
+    {
+        return str_pad($this->registro, 1) .
+            str_pad($this->identificacao_do_retorno, 1) .
+            str_pad($this->identificacao_tipo_de_registro, 2) .
+            str_pad($this->codigo_do_banco, 3) .
+            str_pad($this->brancos, 10) .
+            str_pad($this->quantidade_de_titulos_em_cobranca, 8) .
+            str_pad($this->valor_total_em_cobranca, 14) .
+            str_pad($this->no_do_aviso_bancario, 8) .
+            str_pad($this->brancos_2, 10) .
+            str_pad($this->quantidade_de_registros_ocorrencia_02_confirmacao_de_entradas, 5) .
+            str_pad($this->valor_dos_registros_ocorrencia_02_confirmacao_de_entradas, 12) .
+            str_pad($this->valor_dos_registros_ocorrencia_06_liquidacao, 12) .
+            str_pad($this->quantidade_dos_registros_ocorrencia_06_liquidacao, 5) .
+            str_pad($this->valor_dos_registros_ocorrencia_06, 12) .
+            str_pad($this->quantidade_dos_registros_ocorrencia_09_e_10_titulos_baixados, 5) .
+            str_pad($this->valor_dos_registros_ocorrencia_09_e_10_titulos_baixados, 12) .
+            str_pad($this->quantidade_de_registros_ocorrencia_13_abatimento_cancelado, 5) .
+            str_pad($this->valor_dos_registros_ocorrencia_13_abatimento_cancelado, 12) .
+            str_pad($this->quantidade_dos_registros_ocorrencia_14_vencimento_alterado, 5) .
+            str_pad($this->valor_dos_registros_ocorrencia_14_vencimento_alterado, 12) .
+            str_pad($this->quantidade_dos_registros_005_ocorrencia_12_abatimento_concedido, 5) .
+            str_pad($this->valor_dos_registros_ocorrencia_012_12_abatimento_concedido, 12) .
+            str_pad($this->quantidade_dos_registros_ocorrencia_19_confirmacao_da_instrucao_protesto, 5) .
+            str_pad($this->valor_dos_registros_ocorrencia_012_19_confirmacao_da_instrucao_de_protesto, 12) .
+            str_pad($this->brancos_3, 174) .
+            str_pad($this->valor_total_dos_rateios_015_efetuados, 15) .
+            str_pad($this->quantidade_total_dos_rateios_08_efetuados, 8) .
+            str_pad($this->brancos_4, 9) .
+            str_pad($this->sequencial, 6);
+    }
 
     public function fromString(string $str)
     {
@@ -66,7 +99,7 @@ class TrailerRecordAdapter extends Cnab400Adapter
         $this->valor_total_dos_rateios_015_efetuados = trim(substr($str, 362, 15));
         $this->quantidade_total_dos_rateios_08_efetuados = trim(substr($str, 377, 8));
         $this->brancos_4 = trim(substr($str, 385, 9));
-        $this->numero_sequencial_do_registro = trim(substr($str, 394, 6));
+        $this->sequencial = trim(substr($str, 394, 6));
 
         return $this;
     }

@@ -58,6 +58,7 @@ class Cnab
                     '9' => new Adapters\Cnab400\Remittance\TrailerRecordAdapter(),
                 },
                 CnabFile::TYPE_RETURN => match (substr($record, 0, 1)) {
+                    '0' => new Adapters\Cnab400\Return\HeaderRecordAdapter(),
                     '1' => new Adapters\Cnab400\Return\FirstRecordAdapter(),
                     '3' => new Adapters\Cnab400\Return\ThirdRecordAdapter(),
                     '9' => new Adapters\Cnab400\Return\TrailerRecordAdapter(),
