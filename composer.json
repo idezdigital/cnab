@@ -18,8 +18,7 @@
     "require": {
         "php": "^8.0",
         "illuminate/contracts": "^8.37",
-        "spatie/laravel-package-tools": "^1.4.3",
-        "spatie/laravel-ray": "^1.26"
+        "spatie/laravel-package-tools": "^1.4.3"
     },
     "require-dev": {
         "brianium/paratest": "^6.3",
@@ -33,7 +32,8 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "spatie/laravel-ray": "^1.28"
     },
     "autoload": {
         "psr-4": {
