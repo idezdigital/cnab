@@ -90,7 +90,7 @@ class FirstRecordAdapter extends Cnab400Adapter
         $this->segunda_instrucao = trim(substr($str, 158, 2));
         $this->valor_a_ser_cobrado_por_dia_de_atraso = $this->parseDecimal(trim(substr($str, 160, 13)));
         $this->data_limite_concessao_de_desconto = $this->parseDate(trim(substr($str, 173, 6)));
-        $this->valor_do_desconto = $this->parseDecimal(trim(substr($str, 189, 13)));
+        $this->valor_do_desconto = $this->parseDecimal(trim(substr($str, 179, 13)));
         $this->valor_do_iof = $this->parseDecimal(trim(substr($str, 192, 13)));
         $this->valor_do_abatimento_a_ser_concedido_ou_cancelado = $this->parseDecimal(trim(substr($str, 205, 13)));
         $this->tipo_documento_do_pagador = trim(substr($str, 218, 2)) === '01' ? 'cpf' : 'cnpj';
